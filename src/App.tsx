@@ -3,26 +3,26 @@ import {
   ChakraProvider,
   Input,
   Box,
-  Button
+  Text,
 } from '@chakra-ui/react'
 import { login } from './services/login';
+import { Header } from './components/Header';
+import { Btn } from './components/Button';
+import { Card } from './components/Card';
 
 function App() {
   return (
     <ChakraProvider>
-      <Box minHeight='100vh' backgroundColor='#9413dc' padding='25px'>
-        <Box backgroundColor='#FFFFFF' borderRadius='25px' padding='15px' >
-          <Center>
-            <h1>Faça o login</h1>
+      <Box minHeight='100vh' backgroundColor='#9413dc'>
+        <Header />
+        <Card>
+          <Center flexDirection='column' gap='1rem'>
+            <Text fontSize='2xl' fontWeight='bold'>Login</Text>
+            <Input placeholder="E-mail" />
+            <Input placeholder="Senha" />
+            <Btn onClick={login} text='Entrar'/>
           </Center>
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Center>
-            <Button onClick={login} colorScheme='teal' size='sm' width='100%' marginTop='5px'>
-              Button
-            </Button>
-          </Center>
-        </Box>
+        </Card>
       </Box>
     </ChakraProvider>
   );
