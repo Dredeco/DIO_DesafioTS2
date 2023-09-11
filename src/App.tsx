@@ -1,30 +1,24 @@
-import { 
-  Center,
-  ChakraProvider,
-  Input,
-  Box,
-  Text,
-} from '@chakra-ui/react'
-import { login } from './services/login';
-import { Header } from './components/Header';
-import { Btn } from './components/Button';
-import { Card } from './components/Card';
+import { ChakraProvider } from '@chakra-ui/react'
+import { BrowserRouter } from 'react-router-dom'
+import { AppContextProvider } from './context/AppContext';
+import { createLocalStorage, getAllLocalStorage } from './services/storage';
+import { Layout } from './components/Layout';
+import { MainRoutes } from './routes';
 
 function App() {
+
+  !getAllLocalStorage() && createLocalStorage()
+
   return (
-    <ChakraProvider>
-      <Box minHeight='100vh' backgroundColor='#9413dc'>
-        <Header />
-        <Card>
-          <Center flexDirection='column' gap='1rem'>
-            <Text fontSize='2xl' fontWeight='bold'>Login</Text>
-            <Input placeholder="E-mail" />
-            <Input placeholder="Senha" />
-            <Btn onClick={login} text='Entrar'/>
-          </Center>
-        </Card>
-      </Box>
-    </ChakraProvider>
+    <BrowserRouter>
+      <AppContextProvider>
+        <ChakraProvider>
+          <Layout>
+            <MainRoutes />
+          </Layout>
+        </ChakraProvider>
+      </AppContextProvider>
+    </BrowserRouter>
   );
 }
 
